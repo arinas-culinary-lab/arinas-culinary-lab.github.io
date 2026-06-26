@@ -584,44 +584,216 @@
       letter-spacing: -0.035em;
     }
 
-    .evolution-line {
+    .evolution-slider {
       position: relative;
+      padding: 20px 0 6px;
+    }
+
+    .evolution-track {
+      position: relative;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(58,35,23,0.12);
+      overflow: hidden;
+      margin: 0 8px 28px;
+    }
+
+    .evolution-progress {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--gold), var(--berry));
+      transition: width 0.25s ease;
+    }
+
+    .evolution-range {
+      width: 100%;
+      margin: -48px 0 24px;
+      appearance: none;
+      background: transparent;
+      position: relative;
+      z-index: 3;
+      cursor: pointer;
+    }
+
+    .evolution-range::-webkit-slider-runnable-track {
+      height: 48px;
+      background: transparent;
+    }
+
+    .evolution-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      margin-top: 7px;
+      background: var(--brown);
+      border: 6px solid var(--cream);
+      box-shadow: 0 10px 24px rgba(58,35,23,0.22);
+    }
+
+    .evolution-range::-moz-range-track {
+      height: 48px;
+      background: transparent;
+    }
+
+    .evolution-range::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--brown);
+      border: 6px solid var(--cream);
+      box-shadow: 0 10px 24px rgba(58,35,23,0.22);
+    }
+
+    .evolution-points {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
     }
 
-    .evolution-line::before {
-      content: "";
-      position: absolute;
-      left: 10%;
-      right: 10%;
-      top: 22px;
-      height: 2px;
-      background: rgba(58,35,23,0.12);
+    .evolution-point {
+      padding: 16px;
+      border-radius: 24px;
+      background: rgba(255,253,247,0.68);
+      border: 1px solid rgba(58,35,23,0.09);
+      transition: 0.22s ease;
     }
 
-    .evolution-item {
-      position: relative;
-      z-index: 1;
-      padding: 0 10px;
+    .evolution-point.active {
+      transform: translateY(-2px);
+      border-color: rgba(198, 75, 104, 0.24);
+      box-shadow: 0 16px 36px rgba(82,45,15,0.09);
+      background: rgba(255,253,247,0.92);
     }
 
-    .evolution-dot {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
+    .evolution-visual {
+      height: 124px;
+      border-radius: 20px;
+      margin-bottom: 14px;
       display: grid;
       place-items: center;
-      margin-bottom: 12px;
-      background: var(--cream);
-      color: var(--caramel);
-      border: 1px solid rgba(58,35,23,0.12);
-      font-weight: 950;
-      box-shadow: 0 10px 24px rgba(82,45,15,0.08);
+      background:
+        radial-gradient(circle at 22% 18%, rgba(255,255,255,0.65), transparent 28%),
+        var(--cream);
+      border: 1px solid rgba(58,35,23,0.08);
+      overflow: hidden;
     }
 
-    .evolution-item strong {
+    .dessert-old,
+    .dessert-brownie,
+    .dessert-modern {
+      position: relative;
+      width: 120px;
+      height: 82px;
+    }
+
+    .old-lump {
+      position: absolute;
+      width: 58px;
+      height: 44px;
+      border-radius: 48% 52% 45% 55%;
+      background:
+        radial-gradient(circle at 28% 26%, rgba(255,235,190,0.38), transparent 24%),
+        linear-gradient(135deg, #9a5a22, #6c3518);
+      box-shadow: 0 12px 24px rgba(58,35,23,0.18);
+      transform: rotate(-9deg);
+      top: 24px;
+      left: 10px;
+    }
+
+    .old-lump:nth-child(2) {
+      left: 54px;
+      top: 20px;
+      transform: rotate(8deg);
+      background:
+        radial-gradient(circle at 28% 26%, rgba(255,235,190,0.32), transparent 24%),
+        linear-gradient(135deg, #8c4b1f, #563018);
+    }
+
+    .brownie-piece {
+      position: absolute;
+      width: 82px;
+      height: 58px;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 28% 28%, rgba(255,245,220,0.22), transparent 9px),
+        radial-gradient(circle at 62% 54%, rgba(255,245,220,0.18), transparent 8px),
+        linear-gradient(135deg, #5d2f1d, #27150f);
+      box-shadow: 0 16px 26px rgba(58,35,23,0.22);
+      top: 16px;
+      left: 20px;
+      transform: rotate(-5deg);
+    }
+
+    .brownie-piece:nth-child(2) {
+      top: 30px;
+      left: 50px;
+      transform: rotate(8deg);
+      opacity: 0.92;
+    }
+
+    .modern-plate {
+      position: absolute;
+      left: 4px;
+      right: 4px;
+      bottom: 0;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,253,247,0.82);
+      border: 1px solid rgba(58,35,23,0.09);
+    }
+
+    .modern-blondie {
+      position: absolute;
+      left: 33px;
+      top: 22px;
+      width: 72px;
+      height: 48px;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 22% 32%, #fff0d8 0 5px, transparent 6px),
+        radial-gradient(circle at 70% 62%, #c94d6d 0 5px, transparent 6px),
+        linear-gradient(135deg, #e8bd72, #c98237);
+      border: 1px solid rgba(91,49,18,0.14);
+      box-shadow: 0 13px 22px rgba(82,45,15,0.16);
+      transform: rotate(-4deg);
+    }
+
+    .modern-berry {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--berry);
+      right: 18px;
+      top: 52px;
+      box-shadow: -16px 6px 0 rgba(198,75,104,0.85);
+    }
+
+    .modern-sauce {
+      position: absolute;
+      left: 20px;
+      top: 72px;
+      width: 74px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(198,75,104,0.45);
+      transform: rotate(-8deg);
+    }
+
+    .evolution-point small {
+      display: block;
+      color: var(--berry);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 12px;
+      font-weight: 950;
+      margin-bottom: 6px;
+    }
+
+    .evolution-point strong {
       display: block;
       margin-bottom: 6px;
       font-size: 17px;
@@ -629,7 +801,7 @@
       letter-spacing: -0.025em;
     }
 
-    .evolution-item span {
+    .evolution-point span {
       display: block;
       color: var(--brown-soft);
       font-size: 14px;
@@ -638,28 +810,12 @@
     }
 
     @media (max-width: 880px) {
-      .evolution-line {
+      .evolution-points {
         grid-template-columns: 1fr;
       }
 
-      .evolution-line::before {
-        left: 21px;
-        right: auto;
-        top: 10px;
-        bottom: 10px;
-        width: 2px;
-        height: auto;
-      }
-
-      .evolution-item {
-        display: grid;
-        grid-template-columns: 58px 1fr;
-        gap: 4px;
-        padding: 0;
-      }
-
-      .evolution-dot {
-        margin-bottom: 0;
+      .evolution-range {
+        margin-bottom: 18px;
       }
     }
 
@@ -809,13 +965,64 @@
 
           <div class="evolution-scale">
             <h3 class="evolution-title">Шкала эволюции десерта</h3>
-            <div class="evolution-line" aria-label="Эволюция Блонди от XIX века до современной подачи">
-              <div class="evolution-item">
-                <div class="evolution-dot">I</div>
-                <div>
-                  <strong>Конец XIX века</strong>
-                  <span>Оригинальный brown sugar brownie: золотистый десерт на патоке, еще без темного шоколада.</span>
+
+            <div class="evolution-slider">
+              <div class="evolution-track" aria-hidden="true">
+                <div class="evolution-progress" id="evolutionProgress"></div>
+              </div>
+
+              <input
+                class="evolution-range"
+                id="evolutionRange"
+                type="range"
+                min="0"
+                max="2"
+                step="1"
+                value="0"
+                aria-label="Историческая шкала Блонди"
+              />
+
+              <div class="evolution-points">
+                <div class="evolution-point active" data-evolution-point="0">
+                  <div class="evolution-visual">
+                    <div class="dessert-old" aria-hidden="true">
+                      <span class="old-lump"></span>
+                      <span class="old-lump"></span>
+                    </div>
+                  </div>
+                  <small>Конец XIX века</small>
+                  <strong>Первоначальный brown sugar brownie</strong>
+                  <span>Золотисто-коричневый десерт на патоке: простая домашняя версия до шоколадной славы.</span>
                 </div>
+
+                <div class="evolution-point" data-evolution-point="1">
+                  <div class="evolution-visual">
+                    <div class="dessert-brownie" aria-hidden="true">
+                      <span class="brownie-piece"></span>
+                      <span class="brownie-piece"></span>
+                    </div>
+                  </div>
+                  <small>Шоколадная эпоха</small>
+                  <strong>Брауни становится звездой</strong>
+                  <span>В тесто добавляют темный шоколад, и именно эта версия забирает себе популярность и имя.</span>
+                </div>
+
+                <div class="evolution-point" data-evolution-point="2">
+                  <div class="evolution-visual">
+                    <div class="dessert-modern" aria-hidden="true">
+                      <span class="modern-plate"></span>
+                      <span class="modern-blondie"></span>
+                      <span class="modern-berry"></span>
+                      <span class="modern-sauce"></span>
+                    </div>
+                  </div>
+                  <small>Современные кондитерские</small>
+                  <strong>Блонди возвращается красиво</strong>
+                  <span>Карамельная база, белый шоколад, ягоды, орехи и аккуратная подача как в кофейне.</span>
+                </div>
+              </div>
+            </div>
+          </div>
               </div>
               <div class="evolution-item">
                 <div class="evolution-dot">II</div>
@@ -1183,6 +1390,31 @@
     checks.forEach(item => item.addEventListener('change', updateProgress));
     updateProgress();
 
+
+
+    const evolutionRange = document.getElementById('evolutionRange');
+    const evolutionProgress = document.getElementById('evolutionProgress');
+    const evolutionPoints = Array.from(document.querySelectorAll('.evolution-point'));
+
+    function updateEvolutionScale() {
+      if (!evolutionRange || !evolutionProgress) return;
+      const value = Number(evolutionRange.value);
+      evolutionProgress.style.width = value === 0 ? '0%' : value === 1 ? '50%' : '100%';
+      evolutionPoints.forEach(point => {
+        point.classList.toggle('active', Number(point.dataset.evolutionPoint) === value);
+      });
+    }
+
+    if (evolutionRange) {
+      evolutionRange.addEventListener('input', updateEvolutionScale);
+      evolutionPoints.forEach(point => {
+        point.addEventListener('click', () => {
+          evolutionRange.value = point.dataset.evolutionPoint;
+          updateEvolutionScale();
+        });
+      });
+      updateEvolutionScale();
+    }
 
     const presets = Array.from(document.querySelectorAll('.timer-preset'));
     const timerRing = document.getElementById('timerRing');
