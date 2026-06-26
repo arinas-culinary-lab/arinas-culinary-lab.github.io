@@ -570,317 +570,100 @@
     }
 
 
-    .aroma-lab {
-      display: grid;
-      grid-template-columns: 0.86fr 1.14fr;
-      gap: 22px;
-      align-items: stretch;
+    @media (max-width: 880px) {
+  
+    .evolution-scale {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(58,35,23,0.12);
     }
 
-    .pyramid-card { display: grid; gap: 14px; }
-
-    .aroma-pyramid {
-      display: grid;
-      gap: 10px;
-      padding: 14px;
-      border-radius: 26px;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255, 225, 232, 0.9), transparent 42%),
-        rgba(255, 248, 236, 0.72);
-      border: 1px solid rgba(58,35,23,0.08);
+    .evolution-title {
+      margin-bottom: 18px;
+      font-size: 24px;
+      letter-spacing: -0.035em;
     }
 
-    .aroma-layer {
+    .evolution-line {
       position: relative;
-      border: 1px solid rgba(58,35,23,0.09);
-      width: 100%;
-      min-height: 74px;
-      padding: 16px 18px;
-      border-radius: 22px;
-      color: var(--brown);
-      background: rgba(255,253,247,0.72);
-      text-align: center;
-      cursor: pointer;
-      overflow: hidden;
-      transition: 0.22s ease;
-      font: inherit;
-      box-shadow: 0 14px 30px rgba(82,45,15,0.06);
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
     }
 
-    .aroma-layer::before {
+    .evolution-line::before {
       content: "";
       position: absolute;
-      inset: 0;
-      opacity: 0.45;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.82), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.55s ease;
+      left: 10%;
+      right: 10%;
+      top: 22px;
+      height: 2px;
+      background: rgba(58,35,23,0.12);
     }
 
-    .aroma-layer:hover::before,
-    .aroma-layer.active::before { transform: translateX(100%); }
-
-    .aroma-layer:hover,
-    .aroma-layer.active {
-      transform: translateY(-2px);
-      border-color: rgba(198, 75, 104, 0.26);
-      box-shadow: 0 18px 42px rgba(82,45,15,0.11);
-    }
-
-    .aroma-layer small,
-    .aroma-layer strong {
+    .evolution-item {
       position: relative;
       z-index: 1;
-      display: block;
+      padding: 0 10px;
     }
 
-    .aroma-layer small {
-      color: var(--berry);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 12px;
+    .evolution-dot {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+      background: var(--cream);
+      color: var(--caramel);
+      border: 1px solid rgba(58,35,23,0.12);
       font-weight: 950;
-      margin-bottom: 4px;
+      box-shadow: 0 10px 24px rgba(82,45,15,0.08);
     }
 
-    .aroma-layer strong {
-      font-size: 20px;
-      line-height: 1.15;
+    .evolution-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 17px;
+      line-height: 1.25;
       letter-spacing: -0.025em;
     }
 
-    .aroma-layer.top { width: 58%; margin: 0 auto; background: linear-gradient(135deg, #fffdf7, #ffe1e8); }
-    .aroma-layer.heart { width: 76%; margin: 0 auto; background: linear-gradient(135deg, #fff7e8, #ffe8bd); }
-    .aroma-layer.base { width: 94%; margin: 0 auto; background: linear-gradient(135deg, #fff4dd, #e9c98b); }
-    .aroma-layer.accent { width: 100%; margin: 0 auto; background: linear-gradient(135deg, #fffdf7, #ffd4df); }
-
-    .aroma-details { display: grid; grid-template-columns: 1fr; gap: 18px; }
-
-    .aroma-copy {
-      min-height: 230px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .aroma-copy .badge { margin-bottom: 14px; }
-    .aroma-copy p { margin-bottom: 0; }
-
-    .composition {
-      min-height: 265px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      align-items: center;
-      background:
-        radial-gradient(circle at 84% 14%, rgba(255, 225, 232, 0.8), transparent 34%),
-        rgba(255,253,247,0.86);
-    }
-
-    .blondie-slice {
-      position: relative;
-      height: 220px;
-      border-radius: 26px;
-      background:
-        radial-gradient(circle at 20% 30%, #fff0d8 0 7px, transparent 8px),
-        radial-gradient(circle at 70% 58%, #c94d6d 0 7px, transparent 8px),
-        radial-gradient(circle at 78% 22%, #fff0d8 0 6px, transparent 7px),
-        radial-gradient(circle at 38% 66%, #b83d5a 0 5px, transparent 6px),
-        linear-gradient(180deg, #e7bd73 0%, #d49645 42%, #bb742c 100%);
-      border: 2px solid rgba(91, 49, 18, 0.14);
-      box-shadow: 0 18px 38px rgba(82,45,15,0.16);
-      overflow: hidden;
-    }
-
-    .blondie-slice::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 42px;
-      background:
-        repeating-linear-gradient(90deg, rgba(255,239,198,0.9) 0 10px, rgba(178,119,49,0.34) 10px 14px),
-        linear-gradient(180deg, #f0d492, #dca94d);
-      border-bottom: 1px solid rgba(91,49,18,0.12);
-    }
-
-    .slice-marker {
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      height: 42px;
-      border-radius: 999px;
-      border: 2px solid rgba(255,255,255,0.74);
-      background: rgba(255,255,255,0.18);
-      opacity: 0;
-      transform: scale(0.96);
-      transition: 0.25s ease;
-      pointer-events: none;
-    }
-
-    .slice-marker.active {
-      opacity: 1;
-      transform: scale(1);
-      box-shadow: 0 0 0 999px rgba(58,35,23,0.08);
-    }
-
-    .slice-marker.top { top: 8px; }
-    .slice-marker.heart { top: 66px; }
-    .slice-marker.base { top: 124px; }
-    .slice-marker.accent { top: 166px; }
-
-    .ingredient-cloud {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-content: center;
-    }
-
-    .ingredient-chip {
-      padding: 9px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(58,35,23,0.1);
-      background: rgba(255,248,236,0.78);
-      font-weight: 850;
-      font-size: 14px;
-      transition: 0.2s ease;
-    }
-
-    .ingredient-chip.active {
-      background: var(--brown);
-      color: #fff8ec;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(58,35,23,0.18);
-    }
-
-    .timers-grid {
-      display: grid;
-      grid-template-columns: 0.86fr 1.14fr;
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .timer-panel { display: grid; gap: 18px; }
-    .timer-presets { display: grid; gap: 12px; }
-
-    .timer-preset {
-      border: 1px solid rgba(58,35,23,0.1);
-      background: rgba(255,253,247,0.76);
-      border-radius: 22px;
-      padding: 16px;
-      text-align: left;
-      cursor: pointer;
-      transition: 0.2s ease;
-      font: inherit;
-      color: var(--brown);
-    }
-
-    .timer-preset:hover,
-    .timer-preset.active {
-      transform: translateY(-2px);
-      border-color: rgba(198, 75, 104, 0.28);
-      box-shadow: 0 16px 34px rgba(82,45,15,0.08);
-    }
-
-    .timer-preset strong {
+    .evolution-item span {
       display: block;
-      font-size: 19px;
-      line-height: 1.15;
-      margin-bottom: 4px;
-    }
-
-    .timer-preset span {
       color: var(--brown-soft);
-      font-weight: 750;
       font-size: 14px;
-    }
-
-    .timer-stage {
-      min-height: 430px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      background:
-        radial-gradient(circle at 50% 22%, rgba(255, 225, 232, 0.92), transparent 34%),
-        rgba(255,253,247,0.88);
-    }
-
-    .timer-ring {
-      --timer-progress: 0deg;
-      width: min(285px, 72vw);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background:
-        conic-gradient(var(--berry) var(--timer-progress), rgba(58,35,23,0.09) 0deg),
-        radial-gradient(circle, rgba(255,253,247,1) 0 62%, transparent 63%);
-      box-shadow: inset 0 0 0 1px rgba(58,35,23,0.08), 0 22px 52px rgba(82,45,15,0.12);
-      margin: 0 auto 22px;
-    }
-
-    .timer-inner {
-      width: 78%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255,232,189,0.9), transparent 52%),
-        #fffdf7;
-      border: 1px solid rgba(58,35,23,0.08);
-    }
-
-    .timer-time {
-      font-size: clamp(48px, 9vw, 72px);
-      line-height: 1;
-      font-weight: 950;
-      letter-spacing: -0.07em;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .timer-label {
-      margin-top: 10px;
-      color: var(--berry);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 12px;
-      font-weight: 950;
-    }
-
-    .timer-status {
-      min-height: 28px;
-      font-weight: 850;
-      color: var(--brown-soft);
-    }
-
-    .timer-controls {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .timer-controls .btn { min-height: 46px; padding: 0 18px; }
-
-    .btn.danger {
-      background: rgba(198, 75, 104, 0.1);
-      color: var(--berry-dark);
-      border-color: rgba(198, 75, 104, 0.18);
-    }
-
-    .timer-finished { animation: ringPulse 0.9s ease infinite alternate; }
-
-    @keyframes ringPulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.025); }
+      line-height: 1.45;
+      font-weight: 650;
     }
 
     @media (max-width: 880px) {
-      .aroma-lab,
-      .composition,
-      .timers-grid {
+      .evolution-line {
+        grid-template-columns: 1fr;
+      }
+
+      .evolution-line::before {
+        left: 21px;
+        right: auto;
+        top: 10px;
+        bottom: 10px;
+        width: 2px;
+        height: auto;
+      }
+
+      .evolution-item {
+        display: grid;
+        grid-template-columns: 58px 1fr;
+        gap: 4px;
+        padding: 0;
+      }
+
+      .evolution-dot {
+        margin-bottom: 0;
+      }
+    }
+
+    .timers-grid {
         grid-template-columns: 1fr;
       }
 
@@ -936,7 +719,6 @@
         <a href="#what">Что такое Блонди</a>
         <a href="#archive">Архив</a>
         <a href="#chemistry">Кулинарная химия</a>
-        <a href="#aroma">Аромапирамида</a>
         <a href="#mise">Mise en Place</a>
         <a href="#timers">Таймеры</a>
         <a href="#recipe">Инструкция</a>
@@ -1024,6 +806,40 @@
             Теперь, когда историческая справедливость восстановлена, пора заглянуть в твой
             кондитерский бокс.
           </p>
+
+          <div class="evolution-scale">
+            <h3 class="evolution-title">Шкала эволюции десерта</h3>
+            <div class="evolution-line" aria-label="Эволюция Блонди от XIX века до современной подачи">
+              <div class="evolution-item">
+                <div class="evolution-dot">I</div>
+                <div>
+                  <strong>Конец XIX века</strong>
+                  <span>Оригинальный brown sugar brownie: золотистый десерт на патоке, еще без темного шоколада.</span>
+                </div>
+              </div>
+              <div class="evolution-item">
+                <div class="evolution-dot">II</div>
+                <div>
+                  <strong>Шоколадный поворот</strong>
+                  <span>В тесто добавляют темный шоколад, и новая версия забирает себе имя «брауни».</span>
+                </div>
+              </div>
+              <div class="evolution-item">
+                <div class="evolution-dot">III</div>
+                <div>
+                  <strong>Возвращение в 2010-х</strong>
+                  <span>Кондитеры заново открывают карамельную классику и возвращают ее в кофейни.</span>
+                </div>
+              </div>
+              <div class="evolution-item">
+                <div class="evolution-dot">IV</div>
+                <div>
+                  <strong>Современная подача</strong>
+                  <span>Блонди становится базой для белого шоколада, ягод, орехов и аккуратной шефской сервировки.</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </article>
       </div>
     </section>
@@ -1085,71 +901,6 @@
       </div>
     </section>
 
-
-    <section id="aroma">
-      <div class="page">
-        <div class="section-head reveal">
-          <div class="kicker">Аромапирамида</div>
-          <h2>Как в парфюмерии, только про Блонди</h2>
-          <p class="section-lead">
-            У десерта тоже есть композиция: первые ноты, сердце, база и яркий акцент.
-            Нажимай на слои пирамиды — лаборатория покажет, из чего собирается вкус.
-          </p>
-        </div>
-
-        <div class="aroma-lab">
-          <article class="card pyramid-card reveal">
-            <h3>Пирамида вкуса</h3>
-            <div class="aroma-pyramid" role="tablist" aria-label="Аромапирамида Блонди">
-              <button class="aroma-layer top active" data-aroma="top" type="button">
-                <small>Верхняя нота</small>
-                <strong>Ваниль</strong>
-              </button>
-              <button class="aroma-layer heart" data-aroma="heart" type="button">
-                <small>Сердце</small>
-                <strong>Карамель и масло</strong>
-              </button>
-              <button class="aroma-layer base" data-aroma="base" type="button">
-                <small>База</small>
-                <strong>Миндаль и белый шоколад</strong>
-              </button>
-              <button class="aroma-layer accent" data-aroma="accent" type="button">
-                <small>Акцент</small>
-                <strong>Малина</strong>
-              </button>
-            </div>
-          </article>
-
-          <div class="aroma-details">
-            <article class="card aroma-copy reveal">
-              <span class="badge" id="aromaBadge">Верхняя нота</span>
-              <h3 id="aromaTitle">Ваниль открывает десерт первой</h3>
-              <p id="aromaText">
-                Это первая волна аромата, которую чувствуешь еще до первого кусочка.
-                Ваниль делает сладость мягче, теплее и создает ощущение настоящей кондитерской.
-              </p>
-            </article>
-
-            <article class="card composition reveal">
-              <div class="blondie-slice" aria-label="Визуализация состава Блонди">
-                <span class="slice-marker top active"></span>
-                <span class="slice-marker heart"></span>
-                <span class="slice-marker base"></span>
-                <span class="slice-marker accent"></span>
-              </div>
-              <div class="ingredient-cloud" aria-label="Ингредиенты выбранного слоя">
-                <span class="ingredient-chip active" data-chip="top">Экстракт ванили</span>
-                <span class="ingredient-chip" data-chip="heart">Мусковадо</span>
-                <span class="ingredient-chip" data-chip="heart">Сливочное масло</span>
-                <span class="ingredient-chip" data-chip="base">Белый шоколад</span>
-                <span class="ingredient-chip" data-chip="base">Миндальные лепестки</span>
-                <span class="ingredient-chip" data-chip="accent">Сублимированная малина</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <section id="mise">
       <div class="page">
@@ -1432,49 +1183,6 @@
     checks.forEach(item => item.addEventListener('change', updateProgress));
     updateProgress();
 
-    const aromaData = {
-      top: {
-        badge: 'Верхняя нота',
-        title: 'Ваниль открывает десерт первой',
-        text: 'Это первая волна аромата, которую чувствуешь еще до первого кусочка. Ваниль делает сладость мягче, теплее и создает ощущение настоящей кондитерской.'
-      },
-      heart: {
-        badge: 'Сердце композиции',
-        title: 'Карамель и масло дают фирменный вкус Блонди',
-        text: 'Мусковадо и сливочное масло в духовке собираются в теплую карамельную основу. Именно здесь рождается вкус домашней ириски и та самая влажная fudgy-текстура.'
-      },
-      base: {
-        badge: 'База десерта',
-        title: 'Миндаль и белый шоколад держат глубину',
-        text: 'Белый шоколад дает сливочные островки внутри, а миндальные лепестки создают хрустящую золотистую корочку. Это нижний слой впечатления: нежность плюс crunch.'
-      },
-      accent: {
-        badge: 'Яркий акцент',
-        title: 'Малина балансирует сладость',
-        text: 'Сублимированная малина раскрывается кислинкой и делает вкус объемнее. Без нее Блонди был бы просто сладким, а с ней появляется контраст и характер.'
-      }
-    };
-
-    const aromaButtons = Array.from(document.querySelectorAll('.aroma-layer'));
-    const aromaBadge = document.getElementById('aromaBadge');
-    const aromaTitle = document.getElementById('aromaTitle');
-    const aromaText = document.getElementById('aromaText');
-    const markers = Array.from(document.querySelectorAll('.slice-marker'));
-    const chips = Array.from(document.querySelectorAll('.ingredient-chip'));
-
-    function setAromaLayer(layer) {
-      const data = aromaData[layer];
-      aromaButtons.forEach(button => button.classList.toggle('active', button.dataset.aroma === layer));
-      markers.forEach(marker => marker.classList.toggle('active', marker.classList.contains(layer)));
-      chips.forEach(chip => chip.classList.toggle('active', chip.dataset.chip === layer));
-      aromaBadge.textContent = data.badge;
-      aromaTitle.textContent = data.title;
-      aromaText.textContent = data.text;
-    }
-
-    aromaButtons.forEach(button => {
-      button.addEventListener('click', () => setAromaLayer(button.dataset.aroma));
-    });
 
     const presets = Array.from(document.querySelectorAll('.timer-preset'));
     const timerRing = document.getElementById('timerRing');
