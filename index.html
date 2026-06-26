@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Culinary Lab: Project Blondie</title>
+  <meta name="description" content="Персональная кулинарная страница Арины: Project Blondie" />
+
+  <style>
+    :root {
+      --bg: #fff7eb;
+      --paper: #fffdf7;
+      --cream: #fff0cf;
+      --cream-2: #ffe8bd;
+      --gold: #d89b3d;
+      --caramel: #9a5a22;
+      --brown: #3a2317;
+      --brown-soft: rgba(58, 35, 23, 0.72);
+      --berry: #c64b68;
+      --berry-dark: #9f3450;
+      --pink: #ffe1e8;
+      --green: #75855d;
+      --line: rgba(58, 35, 23, 0.13);
+      --shadow: 0 22px 70px rgba(82, 45, 15, 0.15);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--brown);
+      background:
+        radial-gradient(circle at 10% 4%, rgba(255, 225, 232, 0.95), transparent 28%),
+        radial-gradient(circle at 86% 0%, rgba(255, 211, 133, 0.65), transparent 34%),
+        linear-gradient(180deg, #fff7eb 0%, #fff1d9 45%, #fff8ee 100%);
+      line-height: 1.68;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.32;
+      background-image:
+        linear-gradient(rgba(58,35,23,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(58,35,23,0.05) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: linear-gradient(to bottom, black, transparent 86%);
+    }
+
+    a { color: inherit; }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 42px;
+      align-items: center;
+      padding: 72px 0 54px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 253, 247, 0.75);
+      backdrop-filter: blur(10px);
+      color: var(--caramel);
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+    }
+
+    .eyebrow span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--berry);
+      box-shadow: 0 0 0 6px rgba(198, 75, 104, 0.14);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    h1 {
+      margin-top: 22px;
+      font-size: clamp(46px, 8vw, 92px);
+      max-width: 860px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--berry);
+    }
+
+    .lead {
+      margin: 26px 0 0;
+      font-size: clamp(19px, 2.3vw, 25px);
+      max-width: 780px;
+      color: var(--brown-soft);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 900;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background: var(--brown);
+      color: #fff8ec;
+      box-shadow: 0 16px 34px rgba(58, 35, 23, 0.23);
+    }
+
+    .btn.secondary {
+      background: rgba(255, 253, 247, 0.72);
+      color: var(--brown);
+      border-color: var(--line);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .lab-card {
+      position: relative;
+      border-radius: 36px;
+      padding: 28px;
+      background:
+        linear-gradient(160deg, rgba(255,255,255,0.82), rgba(255,240,207,0.72)),
+        var(--paper);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.95);
+      overflow: hidden;
+    }
+
+    .lab-card::before {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      right: -75px;
+      top: -82px;
+      background: rgba(198, 75, 104, 0.14);
+    }
+
+    .dessert-plate {
+      position: relative;
+      z-index: 1;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at center, #fffdf7 0 45%, #f3dcae 46% 52%, #fff7e9 53% 100%);
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 0 0 1px rgba(58,35,23,0.06);
+    }
+
+    .blondie-stack {
+      width: 68%;
+      transform: rotate(-8deg);
+    }
+
+    .piece {
+      position: relative;
+      height: 76px;
+      margin: -6px 0;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 18% 28%, #fff0d8 0 5px, transparent 6px),
+        radial-gradient(circle at 68% 58%, #c94d6d 0 5px, transparent 6px),
+        radial-gradient(circle at 78% 22%, #fff0d8 0 4px, transparent 5px),
+        linear-gradient(135deg, #e8bd72, #c98237);
+      border: 2px solid rgba(91, 49, 18, 0.16);
+      box-shadow: 0 12px 20px rgba(88, 45, 14, 0.13);
+    }
+
+    .piece::after {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border-radius: 14px;
+      border-top: 3px dotted rgba(255, 244, 218, 0.65);
+      opacity: 0.8;
+    }
+
+    .piece:nth-child(2) { transform: translateX(22px) rotate(6deg); }
+    .piece:nth-child(3) { transform: translateX(-16px) rotate(-4deg); }
+
+    .hero-note {
+      position: relative;
+      z-index: 1;
+      margin-top: 22px;
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.58);
+      border: 1px dashed rgba(58,35,23,0.22);
+      font-weight: 800;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(255, 248, 236, 0.78);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+      padding: 12px 0;
+      overflow-x: auto;
+    }
+
+    .nav a {
+      white-space: nowrap;
+      text-decoration: none;
+      color: var(--brown);
+      font-size: 14px;
+      font-weight: 850;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.58);
+      border: 1px solid rgba(58,35,23,0.08);
+    }
+
+    section { padding: 76px 0; }
+
+    .section-head { margin-bottom: 28px; }
+
+    .kicker {
+      color: var(--berry);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 950;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    h2 { font-size: clamp(34px, 5vw, 58px); }
+
+    h3 {
+      font-size: clamp(23px, 3vw, 32px);
+      margin-bottom: 12px;
+    }
+
+    .section-lead {
+      max-width: 840px;
+      margin: 18px 0 0;
+      color: var(--brown-soft);
+      font-size: 19px;
+    }
+
+    .card {
+      background: rgba(255,253,247,0.86);
+      border: 1px solid rgba(58,35,23,0.1);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 54px rgba(82,45,15,0.08);
+      padding: clamp(22px, 4vw, 36px);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .archive {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,232,189,0.72));
+      border-left: 7px solid var(--gold);
+    }
+
+    .fact {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fact::before {
+      content: attr(data-num);
+      position: absolute;
+      right: 22px;
+      top: 8px;
+      font-size: 72px;
+      line-height: 1;
+      font-weight: 950;
+      color: rgba(198, 75, 104, 0.09);
+      letter-spacing: -0.08em;
+    }
+
+    .fact strong {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: var(--caramel);
+    }
+
+    .callout {
+      border-radius: 24px;
+      padding: 22px;
+      background: var(--pink);
+      border: 1px solid rgba(198, 75, 104, 0.16);
+      font-weight: 750;
+    }
+
+    .checklists {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      align-items: start;
+    }
+
+    .check-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      height: 34px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: var(--cream);
+      color: var(--caramel);
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .checklist label {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 12px;
+      align-items: start;
+      cursor: pointer;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255, 248, 236, 0.72);
+      border: 1px solid rgba(58,35,23,0.07);
+    }
+
+    input[type="checkbox"] {
+      width: 21px;
+      height: 21px;
+      accent-color: var(--berry);
+      margin-top: 2px;
+    }
+
+    .progress-wrap {
+      margin: 24px 0 0;
+      padding: 20px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.58);
+      border: 1px solid rgba(58,35,23,0.08);
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .progress {
+      height: 14px;
+      background: rgba(58,35,23,0.09);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--berry), var(--gold));
+      border-radius: inherit;
+      transition: width 0.25s ease;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 18px;
+    }
+
+    .step {
+      position: relative;
+      padding-left: 76px;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 24px;
+      top: 28px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--brown);
+      color: #fff8ec;
+      font-weight: 950;
+      box-shadow: 0 10px 22px rgba(58,35,23,0.22);
+    }
+
+    .step .tag {
+      display: inline-flex;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--cream);
+      color: var(--caramel);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .important {
+      margin-top: 14px;
+      padding: 15px 16px;
+      border-radius: 18px;
+      background: rgba(198, 75, 104, 0.1);
+      border: 1px solid rgba(198, 75, 104, 0.18);
+      color: var(--berry-dark);
+      font-weight: 800;
+    }
+
+    .serving-card {
+      background:
+        radial-gradient(circle at 88% 12%, rgba(255, 225, 232, 0.85), transparent 28%),
+        rgba(255,253,247,0.9);
+    }
+
+    .final {
+      text-align: center;
+      padding: 88px 0 96px;
+    }
+
+    .final .card {
+      background:
+        radial-gradient(circle at 12% 0%, rgba(255, 225, 232, 0.9), transparent 31%),
+        radial-gradient(circle at 84% 8%, rgba(255, 211, 133, 0.74), transparent 31%),
+        rgba(255,253,247,0.92);
+      padding: clamp(32px, 6vw, 62px);
+    }
+
+    .final p {
+      max-width: 820px;
+      margin: 22px auto 0;
+      font-size: 20px;
+      color: var(--brown-soft);
+    }
+
+    .footer {
+      padding: 26px 0 44px;
+      text-align: center;
+      color: rgba(58,35,23,0.58);
+      font-weight: 750;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: 0.55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 44px;
+      }
+
+      .lab-card {
+        max-width: 520px;
+        margin: 0 auto;
+      }
+
+      .grid-2, .grid-3, .checklists {
+        grid-template-columns: 1fr;
+      }
+
+      .step { padding-left: 24px; padding-top: 72px; }
+
+      .step::before {
+        top: 22px;
+        left: 24px;
+      }
+
+      section { padding: 56px 0; }
+    }
+
+    @media (max-width: 520px) {
+      .page, .nav-inner {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .card {
+        border-radius: 22px;
+      }
+
+      .lab-card {
+        padding: 18px;
+        border-radius: 28px;
+      }
+    }
+
+    @media print {
+      .nav, .hero-actions, .progress-wrap { display: none; }
+      body { background: #fff; }
+      section, .hero { padding: 24px 0; }
+      .card, .lab-card { box-shadow: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <div class="eyebrow"><span></span> Culinary Lab · Project Blondie</div>
+          <h1>Welcome to your <em>Culinary Lab</em></h1>
+          <p class="lead">
+            Арина, добро пожаловать на твою персональную кулинарную страницу!
+            Ты уже доказала, что умеешь классно готовить шоколадный брауни,
+            поэтому it’s time to level up — пора переходить на новый кондитерский уровень.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#start">Начать эксперимент</a>
+            <a class="btn secondary" href="#mise">Проверить ингредиенты</a>
+          </div>
+        </div>
+
+        <aside class="lab-card" aria-label="Project Blondie">
+          <div class="dessert-plate">
+            <div class="blondie-stack" aria-hidden="true">
+              <div class="piece"></div>
+              <div class="piece"></div>
+              <div class="piece"></div>
+            </div>
+          </div>
+          <div class="hero-note">
+            Прежде чем начать, облачайся в свою новую профессиональную форму шеф-повара
+            и приготовься к созданию настоящей магии.
+          </div>
+        </aside>
+      </header>
+    </div>
+
+    <nav class="nav" aria-label="Навигация по странице">
+      <div class="nav-inner">
+        <a href="#start">Старт</a>
+        <a href="#what">Что такое Блонди</a>
+        <a href="#archive">Архив</a>
+        <a href="#chemistry">Кулинарная химия</a>
+        <a href="#mise">Mise en Place</a>
+        <a href="#recipe">Инструкция</a>
+        <a href="#final">Финал</a>
+      </div>
+    </nav>
+
+    <section id="start">
+      <div class="page">
+        <div class="section-head reveal">
+          <div class="kicker">Лабораторное задание</div>
+          <h2>Сегодня в лаборатории появится новый десерт</h2>
+          <p class="section-lead">
+            Чтобы разгадать его секрет, сначала нужно понять, что скрывается за
+            интригующим названием — <strong>Блонди</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="what">
+      <div class="page">
+        <div class="grid-2">
+          <article class="card reveal">
+            <div class="kicker">Что такое Блонди?</div>
+            <h2>Родной брат брауни</h2>
+            <p>
+              Если говорить на языке кондитеров, Блонди — это родной брат твоего любимого
+              шоколадного брауни. У них абсолютно одинаковая текстура: плотная, влажная
+              и слегка тягучая внутри, с тонкой хрустящей корочкой сверху. Такую текстуру
+              называют <strong>fudgy</strong>.
+            </p>
+            <p>
+              Главное отличие — в цвете и вкусе. Вместо темного шоколада основу Блонди
+              составляет дуэт растопленного сливочного масла и тростникового сахара.
+              В духовке они карамелизируются, поэтому десерт получается золотистым
+              и приобретает яркий вкус домашней ириски.
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <div class="kicker">Секрет базы</div>
+            <h2>Площадка для экспериментов</h2>
+            <p>
+              Блонди — идеальная база для смелых кондитерских экспериментов. Но самое
+              удивительное, что этот десерт скрывает интригующий секрет, который полностью
+              меняет представление о его «родстве» с брауни.
+            </p>
+            <div class="callout">
+              Сегодня твоя задача — собрать карамельную формулу, добавить шоколадные
+              островки, малиновую кислинку и хрустящую миндальную корочку.
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="archive">
+      <div class="page">
+        <article class="card archive reveal">
+          <div class="kicker">Кулинарный архив</div>
+          <h2>Блонди появился раньше шоколадного брауни</h2>
+          <p>
+            Мало кто знает, но на самом деле Блонди — это старший брат, и он появился
+            на свет раньше классического темного брауни.
+          </p>
+          <p>
+            Первый рецепт этого десерта опубликовали в Америке еще в конце XIX века.
+            Из-за золотисто-коричневого оттенка патоки его и назвали «брауни»
+            от слова brown. И только спустя десять лет кондитеры решили провести
+            эксперимент и добавили в это же тесто растопленный темный шоколад.
+          </p>
+          <p>
+            Шоколадная версия так сильно полюбилась публике, что полностью забрала себе
+            это имя, а оригинальный рецепт без шоколада был несправедливо забыт.
+          </p>
+          <p>
+            Всё изменилось в 2010-х годах с расцветом интернет-блогов. Кондитеры новой
+            волны начали искать незаслуженно забытые рецепты, откопали эту карамельную
+            классику и буквально подарили ей вторую жизнь. Десерт триумфально вернулся
+            в меню современных кофеен по всему миру, но уже под своим собственным,
+            независимым именем — <strong>Блонди</strong>.
+          </p>
+          <p>
+            Теперь, когда историческая справедливость восстановлена, пора заглянуть в твой
+            кондитерский бокс.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="chemistry">
+      <div class="page">
+        <div class="section-head reveal">
+          <div class="kicker">Секреты Culinary Lab</div>
+          <h2>Кулинарная химия</h2>
+          <p class="section-lead">
+            Кондитерское искусство — это точная наука. Вот несколько интересных фактов
+            об ингредиентах из твоего бокса, которые помогут лучше понять их поведение
+            на кухне.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card fact reveal" data-num="01">
+            <strong>Тростниковый сахар Мусковадо</strong>
+            В отличие от белого сахара, он содержит натуральную тростниковую патоку —
+            густой сироп с карамельным вкусом. Именно меласса удерживает влагу внутри теста.
+            Благодаря этому Блонди получается плотным, мягким и тягучим.
+          </article>
+
+          <article class="card fact reveal" data-num="02">
+            <strong>Экстракт ванили</strong>
+            Натуральный экстракт получают из настоящих стручков ванили. Его аромат усиливает
+            восприятие сладости: мозг реагирует на этот запах так, будто десерт стал насыщеннее,
+            хотя количество сахара осталось прежним.
+          </article>
+
+          <article class="card fact reveal" data-num="03">
+            <strong>Дропсы белого шоколада Callebaut</strong>
+            Бельгийский шоколад Callebaut — мировой стандарт среди шеф-кондитеров. Форма
+            капель создана специально для выпечки: шоколад деликатно подплавляется и образует
+            внутри Блонди нежные сливочные островки.
+          </article>
+
+          <article class="card fact reveal" data-num="04">
+            <strong>Миндальные лепестки</strong>
+            Для кондитерских изделий миндаль бланшируют, очищают и нарезают тонкими лепестками.
+            В духовке масла внутри миндаля нагреются, лепестки станут хрустящими и раскроют
+            тонкий ореховый аромат.
+          </article>
+
+          <article class="card fact reveal" data-num="05">
+            <strong>Сублимированная малина</strong>
+            Это продукт вакуумной сушки: ягоды замораживают, а затем удаляют из них влагу.
+            В тесте малина сработает как вкусовая бомбочка — впитает немного влаги и раскроется
+            кислинкой, которая сбалансирует сладость белого шоколада.
+          </article>
+
+          <article class="card fact reveal" data-num="06">
+            <strong>Кулинарная формула</strong>
+            Все компоненты готовы. Осталось проверить, что нужно достать из холодильника,
+            чтобы запустить процесс и повторить этот мировой хит.
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="mise">
+      <div class="page">
+        <div class="section-head reveal">
+          <div class="kicker">Подготовка</div>
+          <h2>Твой Mise en Place</h2>
+          <p class="section-lead">
+            У шеф-поваров есть золотое правило — Mise en place, читается как «мизанпла́с».
+            Это этап, когда все ингредиенты взвешены, разложены по емкостям, а духовка уже
+            разогревается. Такая подготовка позволяет не отвлекаться и кайфовать от кулинарии,
+            действуя четко, как в лаборатории.
+          </p>
+        </div>
+
+        <div class="checklists">
+          <article class="card check-card reveal">
+            <h3><span class="badge">BOX</span> Из кондитерского бокса</h3>
+            <ul class="checklist">
+              <li><label><input type="checkbox" /> <span>Тростниковый сахар Мусковадо — 100 г</span></label></li>
+              <li><label><input type="checkbox" /> <span>Дропсы белого шоколада Callebaut — 100 г</span></label></li>
+              <li><label><input type="checkbox" /> <span>Экстракт ванили — 1 ч. л.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Миндальные лепестки — 35 г, примерно 3.5 ст. л. с горкой</span></label></li>
+              <li><label><input type="checkbox" /> <span>Сублимированная малина — 15 г, примерно 3 ст. л. с горкой</span></label></li>
+            </ul>
+          </article>
+
+          <article class="card check-card reveal">
+            <h3><span class="badge">HOME</span> Из холодильника и шкафа</h3>
+            <ul class="checklist">
+              <li><label><input type="checkbox" /> <span>Сливочное масло, сильно размягченное — 220 г</span></label></li>
+              <li><label><input type="checkbox" /> <span>Белый сахар — 90 г</span></label></li>
+              <li><label><input type="checkbox" /> <span>Куриные яйца — 2 шт.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Пшеничная мука — 210 г</span></label></li>
+              <li><label><input type="checkbox" /> <span>Разрыхлитель теста — 5 г, ровно 1 ч. л. с небольшой горкой</span></label></li>
+              <li><label><input type="checkbox" /> <span>Соль — 3 г, примерно 1/3 ч. л.</span></label></li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="progress-wrap reveal">
+          <div class="progress-top">
+            <span>Готовность лаборатории</span>
+            <span id="progressText">0%</span>
+          </div>
+          <div class="progress"><span id="progressBar"></span></div>
+        </div>
+
+        <p class="section-lead reveal">
+          Когда все ингредиенты займут свои места на рабочем столе, пути назад не будет.
+          Пора включать весы, разогревать духовку и переходить к первому шагу создания Блонди.
+        </p>
+      </div>
+    </section>
+
+    <section id="recipe">
+      <div class="page">
+        <div class="section-head reveal">
+          <div class="kicker">Инструкция</div>
+          <h2>Создание Блонди</h2>
+        </div>
+
+        <div class="steps">
+          <article class="card step reveal">
+            <span class="tag">Шаг 1</span>
+            <h3>Нагрев и форма</h3>
+            <p>
+              Разогрей духовку до <strong>175°C</strong>. Застели форму пергаментом так,
+              чтобы края бумаги немного свисали — так будет проще достать готовый десерт.
+            </p>
+          </article>
+
+          <article class="card step reveal">
+            <span class="tag">Шаг 2</span>
+            <h3>Сахарно-масляная база</h3>
+            <p>
+              Выложи в чашу сильно размягченное сливочное масло, добавь тростниковый
+              мусковадо и белый сахар. Взбей массу миксером до состояния однородного
+              светлого крема. Это насытит масло воздухом и сделает текстуру нежной.
+            </p>
+          </article>
+
+          <article class="card step reveal">
+            <span class="tag">Шаг 3</span>
+            <h3>Введение яиц</h3>
+            <p>
+              Поочередно добавь в крем яйца — по одному, тщательно вымешивая массу после
+              каждого. В конце влей чайную ложку экстракта ванили и еще раз перемешай
+              до гладкости.
+            </p>
+          </article>
+
+          <article class="card step reveal">
+            <span class="tag">Шаг 4</span>
+            <h3>Добавление муки</h3>
+            <p>
+              Просей к масляной основе муку, разрыхлитель и соль. Перемешай миксером
+              на минимальной скорости ровно до тех пор, пока мука не исчезнет.
+            </p>
+            <div class="important">
+              Важно: перемешивай тесто как можно меньше. Если вымешивать слишком долго,
+              Блонди получится жестким и резиновым, а не нежным и тягучим.
+            </div>
+          </article>
+
+          <article class="card step reveal">
+            <span class="tag">Шаг 5</span>
+            <h3>Наполнители</h3>
+            <p>
+              Всыпь в тесто шоколадные дропсы Callebaut и всю сублимированную малину.
+              Сделай буквально 2–3 быстрых движения снизу вверх, чтобы просто распределить их.
+            </p>
+            <div class="important">
+              Если мешать долго, малина начнет растворяться и окрасит тесто в розовый цвет.
+            </div>
+          </article>
+
+          <article class="card step reveal">
+            <span class="tag">Шаг 6</span>
+            <h3>Распределение и декор</h3>
+            <p>
+              Переложи плотное тесто в форму и разровняй поверхность. Сверху равномерно,
+              плотным слоем засыпь всё миндальными лепестками — они создадут хрустящую корочку.
+            </p>
+          </article>
+
+          <article class="card step reveal">
+            <span class="tag">Шаг 7</span>
+            <h3>Тайминг в духовке</h3>
+            <p>
+              Выпекай Блонди ровно <strong>30 минут</strong>. Лепестки миндаля должны стать
+              золотистыми, а серединка десерта — остаться плотной и влажной.
+            </p>
+            <div class="important">
+              Кондитерский лайфхак: примерно на 15–20 минуте загляни в духовку.
+              Если миндаль уже сильно подрумянился, аккуратно накрой форму листом фольги,
+              чтобы орехи не сгорели.
+            </div>
+          </article>
+
+          <article class="card step reveal">
+            <span class="tag">Шаг 8</span>
+            <h3>Стабилизация</h3>
+            <p>
+              Дай Блонди остыть прямо в форме 15–20 минут, чтобы он окреп. Затем потяни
+              за края пергамента, достань десерт и после полного остывания нарежь
+              на порционные квадратики.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="final">
+      <div class="page">
+        <div class="section-head reveal">
+          <div class="kicker">Финал</div>
+          <h2>Презентация и подача</h2>
+        </div>
+
+        <div class="grid-3">
+          <article class="card serving-card reveal">
+            <h3>Красивый контраст</h3>
+            <p>
+              Переложи кусочки блонди на подарочную тарелку из твоего бокса. Золотистая
+              миндальная корочка десерта и яркие вкрапления малины будут смотреться
+              как в лучшей современной кофейне.
+            </p>
+          </article>
+
+          <article class="card serving-card reveal">
+            <h3>Идеальное сопровождение</h3>
+            <p>
+              Подавай блонди слегка теплым или комнатной температуры. Он безупречно
+              сочетается с шариком ванильного мороженого или чашкой ароматного ягодного чая.
+            </p>
+          </article>
+
+          <article class="card serving-card reveal">
+            <h3>Кондитерский отчет</h3>
+            <p>
+              Прежде чем сделать первый кусь, обязательно сфотографируй эту эстетику
+              прямо на подарочной тарелке и отправь тете. Ей точно будет приятно увидеть
+              твой кулинарный шедевр и результат работы с боксом!
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="page">
+        <article class="card reveal">
+          <div class="kicker">Mission completed</div>
+          <h2>Поздравляем с успешным завершением кулинарного эксперимента!</h2>
+          <p>
+            Ты не просто приготовила десерт, а применила настоящую кондитерскую науку
+            на практике и восстановила историческую справедливость, вернув Блонди
+            на его заслуженное первое место.
+          </p>
+          <p>
+            <strong>Приятного аппетита и до встречи на новых кулинарных опытах!</strong>
+          </p>
+          <div class="hero-actions" style="justify-content:center;">
+            <a class="btn primary" href="#recipe">Вернуться к рецепту</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Culinary Lab: Project Blondie · Made for Арина
+  </footer>
+
+  <script>
+    const checks = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+
+    function updateProgress() {
+      const done = checks.filter(item => item.checked).length;
+      const total = checks.length || 1;
+      const percent = Math.round((done / total) * 100);
+      progressBar.style.width = percent + '%';
+      progressText.textContent = percent + '%';
+    }
+
+    checks.forEach(item => item.addEventListener('change', updateProgress));
+    updateProgress();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(item => observer.observe(item));
+  </script>
+</body>
+</html>
